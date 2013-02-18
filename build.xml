@@ -26,6 +26,8 @@
 	    <mkdir dir="${classes}"/>
 	    <mkdir dir="${lib}"/>
 	    <mkdir dir="${distrib}"/>
+	  	<mkdir dir="dist"/>
+	  	<mkdir dir="bin/stage/VerticaBulkLoader"/>
 	  </target>
 
 	  <!--
@@ -88,7 +90,12 @@
 	    	<fileset 
 	    		dir="${lib}" 
 	    		includes="**/*.jar"/>
-	  	    </copy>
+  	    </copy>
+	  	<copy todir="bin/stage/VerticaBulkLoader">
+	  		<fileset 
+	  		    dir="${lib}" 
+	  		    includes="**/*.jar"/>
+	  	</copy>
 	  </target>
 
 	  <!--
@@ -117,6 +124,14 @@
 	  	    </copy>
 	  </target>
 
+	
+	<!-- quick fix for creating a zip -->
+	<target name="dist" depends="distrib">
+		<zip destfile="dist/VerticaBulkLoader.zip">
+		      <fileset dir="bin/stage"/>
+		</zip>
+	</target>
+	
 	<!--
 	       ==========================
 	          Default target: all
